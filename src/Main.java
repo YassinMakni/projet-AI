@@ -82,9 +82,12 @@ public class Main {
 		children.clear();
 		
 		
-		breadth_search_first(racine) ; 
+		//breadth_search_first(racine) ;
+		//affichageLargeur(racine) ;
+		List<Node> node_visite_depth = new ArrayList<Node>();
+		depth_Search_First(node_visite_depth, racine);
 	}
-	public static   void breadth_search_first( Node racine) {
+	public static   void affichageLargeur( Node racine) {
 		
 		
 		  List<Node> node_visite = new ArrayList<Node>();
@@ -105,11 +108,61 @@ public class Main {
 					  node_visite.add(h);
 				  }
 				  }
+			  }		 	
+	 }
+	
+	public static   void breadth_search_first( Node racine) {
+		
+		
+		  List<Node> node_visite = new ArrayList<Node>();
+		  Queue<Node> q = new LinkedList<>(); 
+		  q.add(racine);
+		  
+		  node_visite.add(racine);
+		 while (q.size() !=0) {
+			 
+			 Node t= q.remove();
+			 if   (t.getData().isGoalNode()) 
+				{
+				 System.out.println( " I found   the goal  !! "+ t.getData().toString());
+			  break;
+			  }
+			
+			 System.out.println( t.getData().toString());
+			 
+			 List<Node> children1 = t.getChildren();
+			  for ( Node h : children1) 
+			  {
+				  
+				  if  ( (isNotVisited( h, node_visite))   && h.getData().isValide() )
+				  { 
+					  q.add(h);
+					  node_visite.add(h);
+				  }
+				  }
 			  }
 			 
-	
-		
 	}
+	
+	public static   void   depth_Search_First(   List<Node>   node_visite_depth, Node  racine ) {
+		
+		
+		      
+		        if (!racine.getData().isGoalNode()) 
+		        	
+		        {
+		        System.out.println( racine.getData().toString());
+		        List<Node> children = racine.getChildren();
+		     for ( Node t:  children) {
+		         if   ((isNotVisited( t, node_visite_depth) )  &&  t.getData().isValide()) depth_Search_First(node_visite_depth, t);
+		        }
+		        }
+		        System.out.println( " I found  the goal !!  "+ racine.getData().toString());    
+	}
+	
+	
+	
+	
 	   public static Boolean  isNotVisited (  Node h  ,List<Node>  b) 
 	   {
 		   

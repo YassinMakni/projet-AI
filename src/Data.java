@@ -27,6 +27,13 @@ public class Data {
 		}
 		return true ; 
 	}
+	
+	public   Boolean   isGoalNode (   )
+	{   if  (chievre == 1 && loup ==1 && chou ==1 && man== 1)
+				return true;
+	   return false;
+		
+	}
 	public String toString() {
 		return "(chievre,loup,chou,man) : ("+chievre+","+loup+","+chou+","+man+")" ;
 	}
